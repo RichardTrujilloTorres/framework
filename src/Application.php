@@ -231,12 +231,30 @@ class Application implements RequestHandlerInterface
      */
     public function dispatchHandler(mixed $handler, ServerRequestInterface $request): ResponseInterface
     {
-        // Callable handler
-        if (is_callable($handler)) {
-            $response = $this->container->call($handler, [
+        $params = array_merge(
+            $request->getAttributes(),
+            [
                 ServerRequestInterface::class => $request,
                 'request' => $request,
-            ]);
+            ]
+        );
+
+        // Array handler: [Controller::class, 'method']
+        if (is_array($handler) && count($handler) === 2) {
+            [$class, $method] = $handler;
+
+            if (is_string($class)) {
+                $class = $this->container->get($class);
+            }
+
+            $response = $this->container->call($class, $method, $params);
+
+            return $this->prepareResponse($response);
+        }
+
+        // Callable handler (closure)
+        if ($handler instanceof \Closure) {
+            $response = $this->container->call($handler, '__invoke', $params);
 
             return $this->prepareResponse($response);
         }
@@ -254,27 +272,7 @@ class Application implements RequestHandlerInterface
 
             $controller = $this->container->get($class);
 
-            $response = $this->container->call([$controller, $method], [
-                ServerRequestInterface::class => $request,
-                'request' => $request,
-            ]);
-
-            return $this->prepareResponse($response);
-        }
-
-        // Array handler: [Controller::class, 'method']
-        if (is_array($handler) && count($handler) === 2) {
-            [$class, $method] = $handler;
-
-            if (is_string($class)) {
-                $controller = $this->container->get($class);
-                $handler = [$controller, $method];
-            }
-
-            $response = $this->container->call($handler, [
-                ServerRequestInterface::class => $request,
-                'request' => $request,
-            ]);
+            $response = $this->container->call($controller, $method, $params);
 
             return $this->prepareResponse($response);
         }
