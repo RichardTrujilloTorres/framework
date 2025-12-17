@@ -1,5 +1,11 @@
 # Lighthouse Framework
 
+[![Tests](https://github.com/RichardTrujilloTorres/framework/actions/workflows/ci.yml/badge.svg)](https://github.com/RichardTrujilloTorres/framework/actions/workflows/ci.yml)
+[![codecov](https://codecov.io/gh/RichardTrujilloTorres/framework/branch/main/graph/badge.svg)](https://codecov.io/gh/RichardTrujilloTorres/framework)
+[![Latest Version](https://img.shields.io/packagist/v/lighthouse/framework.svg)](https://packagist.org/packages/lighthouse/framework)
+[![License](https://img.shields.io/packagist/l/lighthouse/framework.svg)](https://packagist.org/packages/lighthouse/framework)
+
+
 An educational PHP MVC framework designed to teach how modern frameworks work internally.
 
 ## Installation
