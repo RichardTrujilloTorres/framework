@@ -4,12 +4,13 @@
 [![codecov](https://codecov.io/gh/RichardTrujilloTorres/framework/branch/main/graph/badge.svg)](https://codecov.io/gh/RichardTrujilloTorres/framework)
 [![Latest Version](https://img.shields.io/packagist/v/lighthouse/framework.svg)](https://packagist.org/packages/lighthouse/framework)
 [![License](https://img.shields.io/packagist/l/lighthouse/framework.svg)](https://packagist.org/packages/lighthouse/framework)
-
+[![Documentation](https://img.shields.io/badge/docs-online-blue.svg)](https://lighthouse-docs-8csutw2ep-richard-trujillos-projects.vercel.app/)
 
 An educational PHP MVC framework designed to teach how modern frameworks work internally.
 
-## Installation
+📚 **[Read the Documentation](https://lighthouse-docs-8csutw2ep-richard-trujillos-projects.vercel.app/)**
 
+## Installation
 ```bash
 composer require lighthouse/framework
 ```
@@ -52,7 +53,6 @@ $app->run();
 ```
 
 ### Routing
-
 ```php
 // Basic routes
 $app->get('/users', 'UserController@index');
@@ -74,7 +74,6 @@ $url = $app->url('users.show', ['id' => 123]); // /users/123
 ```
 
 ### Controllers
-
 ```php
 <?php
 
@@ -128,7 +127,6 @@ class UserController extends Controller
 ```
 
 ### Middleware
-
 ```php
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Message\ResponseInterface;
@@ -160,7 +158,6 @@ $app->pipe(function ($request, $handler) {
 ```
 
 ### Dependency Injection
-
 ```php
 // Bind services
 $container = $app->getContainer();
@@ -184,7 +181,6 @@ class UserController extends Controller
 ```
 
 ### Error Handling
-
 ```php
 use Lighthouse\ErrorHandler\Exception\NotFoundException;
 use Lighthouse\ErrorHandler\Exception\ForbiddenException;
@@ -209,7 +205,6 @@ $app->get('/users/{id}', function ($id) {
 ```
 
 ### JSON Responses
-
 ```php
 // Return array - automatically converted to JSON
 $app->get('/api/users', function () {
@@ -226,7 +221,6 @@ $app->get('/api/users/{id}', function ($id) use ($app) {
 ```
 
 ### Redirects
-
 ```php
 $app->post('/login', function () use ($app) {
     // ... authenticate
@@ -243,7 +237,6 @@ $app->post('/users', function () use ($app) {
 ```
 
 ## Application Structure
-
 ```
 my-app/
 ├── public/
@@ -319,7 +312,6 @@ The goal is not to replace Laravel or Symfony, but to make them **understandable
 | `empty(status)` | Empty response |
 
 ## Testing
-
 ```bash
 composer test
 ```
